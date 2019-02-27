@@ -18,8 +18,16 @@ document.body.onload = function() {
 
   // First the socket requesta
   function socketExample() {
-    console.log('Creating socket');
-    let socket = new WebSocket('ws://ws-example-so-myproject.jhellar.skunkhenry.com/');
+    
+    var loc = window.location, new_uri;
+    if (loc.protocol === "https:") {
+        new_uri = "wss:";
+    } else {
+        new_uri = "ws:";
+    }
+    new_uri += "//" + loc.host;
+    console.log('Creating socket', new_uri);
+    let socket = new WebSocket(new_uri);
     socket.onopen = function() {
 
       console.log('Socket open.');
